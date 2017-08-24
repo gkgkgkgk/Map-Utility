@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+
+p{
+	color: red;
+}
+
+.room {
+	
+}
+
+.room:hover {
+	border: 5px solid blue;
+}
