@@ -1,7 +1,6 @@
 @charset "ISO-8859-1";
 
-
-p{
+p {
 	color: red;
 }
 
@@ -11,4 +10,42 @@ p{
 
 .room:hover {
 	border: 5px solid blue;
+}
+
+.navbar {
+	overflow: hidden;
+	background-color: #0f1626;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.navbar a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+/* Main content */
+.main {
+	margin: 70px; /* Add a top margin to avoid content overlay */
+	display: block;
+}
+
+#mapDivTitle {
+
+}
+
+#mapDiv {
+	text-align: center;
+	margin: 150px auto;
+	display: table;
+}
+.arrow{
+	height: 30px;
+	width: 30px;
+	outline: none;
 }

@@ -6,31 +6,62 @@
 <script src="JS/jquery-3.2.1.js"></script>
 <script src="JS/controller.js"></script>
 <script src="JS/maphilight.js"></script>
-<script src="JS/imagemapster.js"></script>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+	crossorigin="anonymous" />
+<link rel="stylesheet" href="CSS/Main.css" />
 
 </head>
 <body>
-	<p>Welcome</p>
-	<div id="content" style="left: 50%; border-style: solid; border-width: 5px; width:100%; height:50%;">
-		<div style="display: table; margin: 0 auto;">
-			<img src="images/floorplan.jpg" usemap="#map" class="map" />
+	<div class="navbar">
+		<a href="/home">Home</a> <a href="/maps">Maps</a> <a href="/schedule">Schedule</a>
+	</div>
+	<div class="main">
+		<div id="mapDiv">
+			<div id="mapDivTitle">
+				<h1>Map of Floor XYZ</h1>
+			</div>
+			<img src="images/floorplan.jpg" usemap="#map" class="map"
+				style="object-fit: contain" />
 			<map name="map">
-				<area alt="" title="" href="#" shape="poly" data-name = "room1"
-					coords="4,33,257,33,258,196,5,196"/>
-				<area alt="" title="" href="#" shape="poly" data-name = "room2"
+				<area alt="" title="" href="#" shape="poly" data-name="room1"
+					coords="4,33,257,33,258,196,5,196" />
+				<area alt="" title="" href="#" shape="poly" data-name="room2"
 					coords="263,33,394,33,395,143,261,145" />
-				<area alt="" title="" href="#" shape="poly" data-name = "room3"
+				<area alt="" title="" href="#" shape="poly" data-name="room3"
 					coords="5,200,171,200,169,356,6,356" />
-				<area alt="" title="" href="#" shape="poly" data-name = "room4"
+				<area alt="" title="" href="#" shape="poly" data-name="room4"
 					coords="172,250,293,250,295,356,172,356" />
-				<area alt="" title="" href="#" shape="poly" data-name = "room5"
+				<area alt="" title="" href="#" shape="poly" data-name="room5"
 					coords="398,206,544,206,546,358,398,357" />
-				<area alt="" title="" href="#" shape="poly" data-name = "room6"
+				<area alt="" title="" href="#" shape="poly" data-name="room6"
 					coords="398,33,544,34,545,201,397,200" />
-				<area alt="" title="" href="#" shape="poly" data-name = "room7"
-					coords="263,148,320,148,319,197,262,196"/>
+				<area alt="" title="" href="#" shape="poly" data-name="room7"
+					coords="263,148,320,148,319,197,262,196" />
 
 			</map>
+		</div>
+		<div id="timePicker" style = "text-align: center">
+			<div id="hour" style="display: inline-block; text-align: center;">
+				<input id = "hourUp" type="image" src="images/upArrow.png" class="arrow" />
+				<h4 id = "hourText" style="line-height: 50%; vertical-align: middle;">12</h4>
+				<input id = "hourDown" type="image" src="images/downArrow.png" class="arrow" />
+			</div>
+			<div id="minute" style="display: inline-block; text-align: center;">
+				<input id = "minuteUp" type="image" src="images/upArrow.png" class="arrow" />
+				<h4 style="line-height: 50%; vertical-align: middle;">30</h4>
+				<input id = "minuteDown" type="image" src="images/downArrow.png" class="arrow" />
+			</div>
+			<div id="period" style="display: inline-block; text-align: center;">
+				<input id = "periodUp" type="image" src="images/upArrow.png" class="arrow" />
+				<h4 style="line-height: 50%; vertical-align: middle;">AM</h4>
+				<input id = "periodDown" type="image" src="images/downArrow.png" class="arrow" />
+			</div>
+		</div>
+		<div style = "text-align: center">
+		<input id="slider" type="range" step = "15" min = "0" max = "1440" style = "width : 50%; outline: none;"></input>
 		</div>
 	</div>
 </body>
