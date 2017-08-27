@@ -22,18 +22,3 @@
 	margin: 70px; /* Add a top margin to avoid content overlay */
 	display: block;
 }
-
-#mapDivTitle {
-
-}
-
-#mapDiv {
-	text-align: center;
-	margin: 150px auto;
-	display: table;
-}
-.arrow{
-	height: 30px;
-	width: 30px;
-	outline: none;
-}

@@ -5,6 +5,7 @@ import javax.annotation.Resources;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class MainController {
@@ -15,14 +16,20 @@ public class MainController {
 	}
 	
 	
-	/*@GetMapping("/home")
+	@GetMapping("/home")
 	public String getHome(Model model) {
 		model.addAttribute("home", new Entity());
 		return "home";
-	}*/
+	}
 
-	@GetMapping("/home")
-	public String getHome(Model model) {
+	@GetMapping("/maps")
+	public String getMappings(Model model) {
+		model.addAttribute("maps", new Entity());
+		return "maps";
+	}
+	
+	@GetMapping("/{floorname}")
+	public String getFloorplan(@PathVariable String floorname, Model model) {
 		model.addAttribute("floorplan", new Entity());
 		return "floorplan";
 	}

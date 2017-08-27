@@ -1,3 +1,5 @@
+var currentTime = 0;
+
 $(document)
     .ready(
         function() {
@@ -26,83 +28,110 @@ $(document)
             });
 
             /* time settings */
-            $('#hourUp').click(
-                function() {
-                    if ($('#hourText').text() < 12) {
-                        $('#hourText')
-                            .text(
+            $('#hourUp')
+                .click(
+                    function() {
+                        if ($('#hourText').text() < 12) {
+                            $('#hourText').text(
                                 parseInt($('#hourText')
                                     .text()) + 1);
-                    } else {
-                        $('#hourText').text(1);
-                    }
-                });
-            $('#hourDown').click(
-                function() {
-                    if ($('#hourText').text() > 1) {
-                        $('#hourText')
-                            .text(
-                                parseInt($('#hourText')
-                                    .text()) - 1);
-                    } else {
-                        $('#hourText').text(12);
-                    }
-                });
-            $('#minuteUp')
-                .click(
-                    function() {
-                        if ($('#minute h4').text() < 59) {
-                            if (parseInt($('#minute h4').text()) - 1 < 8) {
-                                $('#minute h4')
-                                    .text(
-                                        "0" +
-                                        (parseInt($(
-                                                '#minute h4')
-                                            .text()) + 1));
-                            } else {
-                                $('#minute h4')
-                                    .text(
-                                        parseInt($(
-                                                '#minute h4')
-                                            .text()) + 1);
-                            }
                         } else {
-                            $('#minute h4').text(1);
+                            $('#hourText').text(1);
                         }
+                        currentTime = (parseInt($('#hourText')
+                                .text()) * 60) +
+                            parseInt($('#minute h4')
+                                .text());
+                        $('#slider').val(currentTime);
+
                     });
-            $('#minuteDown')
-                .click(
-                    function() {
-                        if ($('#minute h4').text() > 0) {
-                            if (parseInt($('#minute h4').text()) - 1 < 10) {
-                                $('#minute h4')
-                                    .text(
-                                        "0" +
-                                        (parseInt($(
-                                                '#minute h4')
-                                            .text()) - 1));
-                            } else {
-                                $('#minute h4')
-                                    .text(
-                                        parseInt($(
-                                                '#minute h4')
-                                            .text()) - 1);
-                            }
-                        } else {
-                            $('#minute h4').text(59);
-                        }
-                    });
+            /* $('#hourDown').click(
+                 function() {
+                     if ($('#hourText').text() > 1) {
+                         $('#hourText')
+                             .text(
+                                 parseInt($('#hourText')
+                                     .text()) - 1);
+                     } else {
+                         $('#hourText').text(12);
+                     }
+                     currentTime = (parseInt($('#hourText').text()) * 60) + parseInt($('#minute h4').text());
+                     $('#slider').val(currentTime);
+
+                 });
+             $('#minuteUp')
+                 .click(
+                     function() {
+                         if ($('#minute h4').text() < 59) {
+                             if (parseInt($('#minute h4').text()) - 1 < 8) {
+                                 $('#minute h4')
+                                     .text(
+                                         "0" +
+                                         (parseInt($(
+                                                 '#minute h4')
+                                             .text()) + 1));
+                             } else {
+                                 $('#minute h4')
+                                     .text(
+                                         parseInt($(
+                                                 '#minute h4')
+                                             .text()) + 1);
+                             }
+                         } else {
+                             $('#minute h4').text(1);
+                         }
+                         currentTime = (parseInt($('#hourText').text()) * 60) + parseInt($('#minute h4').text());
+                         $('#slider').val(currentTime);
+
+                     });
+             $('#minuteDown')
+                 .click(
+                     function() {
+                         if ($('#minute h4').text() > 0) {
+                             if (parseInt($('#minute h4').text()) - 1 < 10) {
+                                 $('#minute h4')
+                                     .text(
+                                         "0" +
+                                         (parseInt($(
+                                                 '#minute h4')
+                                             .text()) - 1));
+                             } else {
+                                 $('#minute h4')
+                                     .text(
+                                         parseInt($(
+                                                 '#minute h4')
+                                             .text()) - 1);
+                             }
+                         } else {
+                             $('#minute h4').text(59);
+                         }
+                         currentTime = (parseInt($('#hourText').text()) * 60) + parseInt($('#minute h4').text());
+                         $('#slider').val(currentTime);
+                     });
+                         
+             $('#periodDown, #periodUp').click(function(){
+             	if($('#period h4').text().indexOf("AM") >= 0){
+             		$('#period h4').text("PM");
+             		console.log($('#slider').val());
+             		$('#slider').val($('#slider').val() + (12 * 15));
+             		console.log($('#slider').val());
+             	}
+             	else{
+             		$('#period h4').text("AM");
+             		$('#slider').val($('#slider').val() - (12 * 15));
+
+             	}
+             });*/
             $('#slider')
                 .on(
                     "change mousemove",
                     function() {
-
                         if ($(this).val() < 60) {
-                            $('#hourText').text(12);
+                            $('#hour h4').text(12);
                             $('#minute h4').text(
                                 parseInt($(this).val()));
                         } else if ($(this).val() < 780) {
-                            $('#hourText').text(
+                            $('#hour h4').text(
                                 parseInt(Math.floor($(this)
                                     .val() / 60)));
                             $('#minute h4')
@@ -113,6 +142,13 @@ $(document)
                                             .floor($(
                                                     this)
                                                 .val() / 60) * 60)));
+                            if($(this).val() < 720){
+                            	$('#period h4').text('AM');
+                            }
+                            else{
+                            	$('#period h4').text('PM');
+                            }
+                            
                         } else {
                             $('#hourText').text(
                                 parseInt(Math.floor($(this)
@@ -125,8 +161,9 @@ $(document)
                                             .floor($(
                                                     this)
                                                 .val() / 60) * 60)));
-                        }
+                            $('#period h4').text('PM');
 
+                        }
                     });
 
         });
