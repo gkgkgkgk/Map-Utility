@@ -4,7 +4,6 @@
 <title>Welcome</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script src="JS/jquery-3.2.1.js"></script>
-<script src="JS/controller.js"></script>
 <link rel="stylesheet" href="CSS/home.css" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -12,9 +11,40 @@
 	crossorigin="anonymous" />
 </head>
 <body>
-	<div class="navbar">
-		<a href="/home">Home</a> <a href="/maps">Maps</a> <a href="/schedule">Schedule</a>
+	<div class="jumbotron" style="background-color: red !important;">
+		<div class="container">
+			<h1>School Map Utility</h1>
+			<h5>Find which classrooms are being used and when with the
+				School Map Utility.</h5>
+		</div>
 	</div>
-	<div class="main"></div>
+	<div class="main" style="text-align: center;">
+		<h1 style = "color:#333333">School Maps Utility</h1>
+		<p style="color: gray;">Find all maps below.</p>
+		<div id="mapsContainer" style="margin-top: 50px;">
+			<div class="container">
+				<div class="row" style="text-align: center;">
+					<div class="col-md-4 myColumn">
+						<a href="/floorplan"> <img alt="Image Missing"
+							src="images/floors/floorplan.jpg" />
+							<h5>Floorplan</h5>
+						</a>
+					</div>
+					<div class="col-md-4 myColumn">
+						<a href="/floorplan"> <img alt="Image Missing"
+							src="images/floors/floorplan.jpg" />
+							<h5>Floorplan</h5>
+						</a>
+					</div>
+					<div class="col-md-4 myColumn">
+						<a href="/floorplan"> <img alt="Image Missing"
+							src="images/floors/floorplan.jpg" />
+							<h5>Floorplan</h5>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
