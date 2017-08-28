@@ -1,10 +1,7 @@
 @charset "ISO-8859-1";
 
 /* Main content */
-.main {
-	margin: 70px; /* Add a top margin to avoid content overlay */
-	display: block;
-}
+
 
 a {
 	display: table-cell;
