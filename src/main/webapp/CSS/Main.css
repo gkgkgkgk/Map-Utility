@@ -7,16 +7,26 @@
 }
 
 #mapDivTitle {
-
+	text-align: center;
 }
 
 #mapDiv {
-	text-align: center;
-	margin: 150px auto;
-	display: table;
+	
 }
-.arrow{
+
+.arrow {
 	height: 30px;
 	width: 30px;
 	outline: none;
+}
+
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+	cursor: pointer;
 }

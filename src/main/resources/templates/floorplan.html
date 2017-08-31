@@ -17,29 +17,52 @@
 </head>
 <body>
 	<div class="main">
-		<div id="mapDiv">
-			<div id="mapDivTitle">
-				<h1>Map of Floor XYZ</h1>
-			</div>
-			<img src="images/floors/floorplan.jpg" usemap="#map" class="map"
-				style="object-fit: contain" />
-			<map name="map">
-				<area alt="" title="" href="#" shape="poly" data-name="room1"
-					coords="4,33,257,33,258,196,5,196" />
-				<area alt="" title="" href="#" shape="poly" data-name="room2"
-					coords="263,33,394,33,395,143,261,145" />
-				<area alt="" title="" href="#" shape="poly" data-name="room3"
-					coords="5,200,171,200,169,356,6,356" />
-				<area alt="" title="" href="#" shape="poly" data-name="room4"
-					coords="172,250,293,250,295,356,172,356" />
-				<area alt="" title="" href="#" shape="poly" data-name="room5"
-					coords="398,206,544,206,546,358,398,357" />
-				<area alt="" title="" href="#" shape="poly" data-name="room6"
-					coords="398,33,544,34,545,201,397,200" />
-				<area alt="" title="" href="#" shape="poly" data-name="room7"
-					coords="263,148,320,148,319,197,262,196" />
+	<div id="mapDivTitle">
+						<h1>Map of Floor XYZ</h1>
+					</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4"
+					style="text-align: center;">
+					<div
+						style="display: table; height: 100%; position: absolute; overflow: hidden; width: 100%;">
+						<div style="display: table-cell; vertical-align: middle;">
+							<ul class="list-group"
+								style="list-style-type: none; display: inline-block;">
+								<li class="list-group-item noselect">Sunday</li>
+								<li class="list-group-item noselect">Monday</li>
+								<li class="list-group-item noselect">Tuesday</li>
+								<li class="list-group-item noselect">Wednesday</li>
+								<li class="list-group-item noselect">Thursday</li>
+								<li class="list-group-item noselect">Friday</li>
+								<li class="list-group-item noselect">Saturday</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="mapDiv" class="col-sm-4">
+					<img src="images/floors/floorplan.jpg" usemap="#map" class="map"
+						style="object-fit: contain" />
+					<map name="map">
+						<area alt="" title="" href="#" shape="poly" data-name="room1"
+							coords="4,33,257,33,258,196,5,196"/>
+						<area alt="" title="" href="#" shape="poly" data-name="room2"
+							coords="263,33,394,33,395,143,261,145" />
+						<area alt="" title="" href="#" shape="poly" data-name="room3"
+							coords="5,200,171,200,169,356,6,356" />
+						<area alt="" title="" href="#" shape="poly" data-name="room4"
+							coords="172,250,293,250,295,356,172,356" />
+						<area alt="" title="" href="#" shape="poly" data-name="room5"
+							coords="398,206,544,206,546,358,398,357" />
+						<area alt="" title="" href="#" shape="poly" data-name="room6"
+							coords="398,33,544,34,545,201,397,200" />
+						<area alt="" title="" href="#" shape="poly" data-name="room7"
+							coords="263,148,320,148,319,197,262,196" />
 
-			</map>
+					</map>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
 		</div>
 		<!-- <div id="timePicker" style = "text-align: center">
 			<div id="hour" style="display: inline-block; text-align: center;">
