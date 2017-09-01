@@ -29,6 +29,6 @@ public class MainController {
 	@GetMapping("/{floorname}")
 	public String getFloorplan(@PathVariable String floorname, Model model) {
 		model.addAttribute("floorplan", new Entity());
-		return "floorplan";
+		return floorname;
 	}
 }
