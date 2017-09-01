@@ -1,0 +1,43 @@
+@charset "ISO-8859-1";
+
+/* Main content */
+
+
+a {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+a img {
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.jumbotron {
+	color : #ffffff;
+    position: relative;
+    background-image: -webkit-linear-gradient(left, #000000 0%, #000080 110%);
+    background-image: -moz-linear-gradient(left, #000000 0%, #000080 110%);
+    background-image: -o-linear-gradient(left, #000000 0%, #000080 110%);
+    background-image: linear-gradient(to right, #000000 0%, #000080 110%);
+}
+.jumbotron:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    background-image: url("http://www.lamidesign.com/pages/0129/0129plan.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.jumbotron h1 {
+	font-size: 120px !important;
+	color: white;
+	opacity : 1;
+}
