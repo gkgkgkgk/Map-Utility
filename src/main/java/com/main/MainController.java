@@ -1,7 +1,5 @@
 package com.main;
 
-import javax.annotation.Resources;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

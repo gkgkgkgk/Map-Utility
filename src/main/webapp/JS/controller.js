@@ -16,10 +16,7 @@ $(document).ready(function() {
 	initControl();
 	slider();
 	areaSelector();
-	$("li").on("click", function() {
-		$("li").removeClass("active");
-		$(this).addClass("active");
-	});
+	listManager();
 
 });
 
@@ -46,20 +43,20 @@ function slider() {
 					"change mousemove",
 					function() {
 						if ($(this).val() < 60) {
-							$('#hour h4').text(12);
-							$('#minute h4').text(parseInt($(this).val()));
+							$('#hour h3').text(12);
+							$('#minute h3').text(parseInt($(this).val()));
 						} else if ($(this).val() < 780) {
-							$('#hour h4').text(
+							$('#hour h3').text(
 									parseInt(Math.floor($(this).val() / 60)));
-							$('#minute h4')
+							$('#minute h3')
 									.text(
 											parseInt($(this).val()
 													- parseInt(Math.floor($(
 															this).val() / 60) * 60)));
 							if ($(this).val() < 720) {
-								$('#period h4').text('AM');
+								$('#period h3').text('AM');
 							} else {
-								$('#period h4').text('PM');
+								$('#period h3').text('PM');
 							}
 
 						} else {
@@ -67,12 +64,12 @@ function slider() {
 									.text(
 											parseInt(Math
 													.floor($(this).val() / 60) - 12));
-							$('#minute h4')
+							$('#minute h3')
 									.text(
 											parseInt($(this).val()
 													- parseInt(Math.floor($(
 															this).val() / 60) * 60)));
-							$('#period h4').text('PM');
+							$('#period h3').text('PM');
 
 						}
 					});
@@ -94,4 +91,11 @@ function areaSelector() {
 						$(this).data('maphilight', data).trigger(
 								'alwaysOn.maphilight');
 					});
+}
+
+function listManager(){
+	$("li").on("click", function() {
+		$("li").removeClass("active");
+		$(this).addClass("active");
+	});
 }
