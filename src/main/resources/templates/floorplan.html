@@ -6,13 +6,25 @@
 <script src="JS/jquery-3.2.1.js"></script>
 <script src="JS/controller.js"></script>
 <script src="JS/maphilight.js"></script>
+<script
+	src="Libraries/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript"
+	src="Libraries/clockpicker-gh-pages/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="Libraries/clockpicker-gh-pages/dist/bootstrap-clockpicker.min.js"></script>
+
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="CSS/Main.css" />
-<link type="text/css" href="CSS/bootstrap-timepicker.css" />
+<link rel="stylesheet"
+	href="Libraries/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="Libraries/clockpicker-gh-pages/assets/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="Libraries/clockpicker-gh-pages/dist/bootstrap-clockpicker.min.css" />
 
 </head>
 <body>
@@ -23,10 +35,9 @@
 		<div class="container" style="width: 100%;">
 			<div class="row">
 				<div class="col-sm-2" style="text-align: center;">
-					<div
-						style="display: table; height: 100%; position: absolute; overflow: hidden; width: 100%;">
+					<div style="display: table; height: 100%; width: 100%;">
 						<div style="display: table-cell; vertical-align: middle;">
-							<ul class="list-group"
+							<!-- <ul class="list-group"
 								style="list-style-type: none; display: inline-block;">
 								<li class="list-group-item noselect">Sunday</li>
 								<li class="list-group-item noselect">Monday</li>
@@ -35,7 +46,7 @@
 								<li class="list-group-item noselect">Thursday</li>
 								<li class="list-group-item noselect">Friday</li>
 								<li class="list-group-item noselect">Saturday</li>
-							</ul>
+							</ul> -->
 						</div>
 					</div>
 				</div>
@@ -62,6 +73,23 @@
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
+			<div class="row" style = "margin-top: 50px">
+				<div class="col-sm-5"></div>
+				<div class="col-sm-2">
+					<div class="input-group clockpicker" data-placement="right"
+						data-align="top" data-autoclose="true">
+						<input type="text" class="form-control" /> <span
+							class="input-group-addon"> <span
+							class="glyphicon glyphicon-time"></span>
+						</span>
+					</div>
+					<div style="position: relative" id="dateContainer">
+						<input id="datePicker" type="text" class="form-control" />
+					</div>
+				</div>
+				<div class="col-sm-5"></div>
+
+			</div>
 		</div>
 		<!-- <div id="timePicker" style = "text-align: center">
 			<div id="hour" style="display: inline-block; text-align: center;">
@@ -80,25 +108,6 @@
 				<input id = "periodDown" type="image" src="images/downArrow.png" class="arrow" />
 			</div>
 		</div> -->
-		<div id="timePicker"
-			style="text-align: center; margin-bottom: 25px; margin-top: 50px;">
-			<div id="hour" style="display: inline-block; text-align: center;">
-				<h3 id="hourText" style="line-height: 50%; vertical-align: middle;">12</h3>
-			</div>
-			<div style="display: inline-block; text-align: center;">
-				<h3 style="line-height: 50%; vertical-align: middle;">:</h3>
-			</div>
-			<div id="minute" style="display: inline-block; text-align: center;">
-				<h3 style="line-height: 50%; vertical-align: middle;">30</h3>
-			</div>
-			<div id="period" style="display: inline-block; text-align: center;">
-				<h3 style="line-height: 50%; vertical-align: middle;">AM</h3>
-			</div>
-		</div>
-		<div style="text-align: center">
-			<input id="slider" type="range" step="15" min="0" max="1440"
-				style="width: 50%; outline: none;" />
-		</div>
 	</div>
 </body>
 </html>

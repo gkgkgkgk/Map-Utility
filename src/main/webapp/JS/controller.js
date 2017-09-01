@@ -8,13 +8,17 @@ var takenOuter = "CC8400";
 var takenInner = "FFC04C";
 
 var d = new Date();
+var mo = d.getMonth() + 1;
+var da = d.getDate();
+var yr = d.getUTCFullYear();
 var m = d.getMinutes();
 var h = d.getHours();
 
 $(document).ready(function() {
+	initSelectors();
 	initMap();
 	initControl();
-	slider();
+	// slider();
 	areaSelector();
 	listManager();
 
@@ -37,43 +41,19 @@ function initControl() {
 	$("#period").text((h >= 12) ? "PM" : "AM");
 }
 
-function slider() {
-	$('#slider')
-			.on(
-					"change mousemove",
-					function() {
-						if ($(this).val() < 60) {
-							$('#hour h3').text(12);
-							$('#minute h3').text(parseInt($(this).val()));
-						} else if ($(this).val() < 780) {
-							$('#hour h3').text(
-									parseInt(Math.floor($(this).val() / 60)));
-							$('#minute h3')
-									.text(
-											parseInt($(this).val()
-													- parseInt(Math.floor($(
-															this).val() / 60) * 60)));
-							if ($(this).val() < 720) {
-								$('#period h3').text('AM');
-							} else {
-								$('#period h3').text('PM');
-							}
-
-						} else {
-							$('#hourText')
-									.text(
-											parseInt(Math
-													.floor($(this).val() / 60) - 12));
-							$('#minute h3')
-									.text(
-											parseInt($(this).val()
-													- parseInt(Math.floor($(
-															this).val() / 60) * 60)));
-							$('#period h3').text('PM');
-
-						}
-					});
-}
+/*
+ * function slider() { $('#slider') .on( "change mousemove", function() { if
+ * ($(this).val() < 60) { $('#hour h3').text(12); $('#minute
+ * h3').text(parseInt($(this).val())); } else if ($(this).val() < 780) {
+ * $('#hour h3').text( parseInt(Math.floor($(this).val() / 60))); $('#minute
+ * h3') .text( parseInt($(this).val() - parseInt(Math.floor($( this).val() / 60) *
+ * 60))); if ($(this).val() < 720) { $('#period h3').text('AM'); } else {
+ * $('#period h3').text('PM'); }
+ *  } else { $('#hourText') .text( parseInt(Math .floor($(this).val() / 60) -
+ * 12)); $('#minute h3') .text( parseInt($(this).val() - parseInt(Math.floor($(
+ * this).val() / 60) * 60))); $('#period h3').text('PM');
+ *  } }); }
+ */
 
 function areaSelector() {
 	$('area')
@@ -98,4 +78,21 @@ function listManager(){
 		$("li").removeClass("active");
 		$(this).addClass("active");
 	});
+}
+
+function initSelectors(){
+	$('#datePicker').datepicker({
+		autoclose : true,
+		todayHighlight : true,
+		orientation : 'bottom',
+		container:'#dateContainer'
+	});
+	$('#datePicker').datepicker('update', mo + "-" + da + "-" + yr);
+	$('.clockpicker').clockpicker({
+	default : 'now',
+	autoclose : true,
+	align : 'top'
+	});
+	$(".clockpicker input").css("value", h+":"+m);
+
 }
