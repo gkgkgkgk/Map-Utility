@@ -6,9 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 
-/*import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+/*import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;*/
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,30 +22,47 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class MainController {
 
+	
+    private static final String FILE_NAME = "F:/Downloads/Roomcal.xlsx";
+
+	
 	@GetMapping("/")
 	public String redirect(Model model) throws IOException {
-		/*File myFile = new File("F://Downloads/Room Reservation Calendar (26882 records) 2017-09-03.xlsx"); 
-		FileInputStream fis = new FileInputStream(myFile); // Finds the workbook instance for XLSX file 
-		XSSFWorkbook myWorkBook = new XSSFWorkbook (fis); // Return first sheet from the XLSX workbook 
-		XSSFSheet mySheet = myWorkBook.getSheetAt(0); // Get iterator to all the rows in current sheet 
-		Iterator<Row> rowIterator = mySheet.iterator(); // Traversing over each row of XLSX file 
-		
-		while (rowIterator.hasNext()) { 
-		Row row = rowIterator.next(); // For each row, iterate through each columns 
-		Iterator<Cell> cellIterator = row.cellIterator();
-		
-		while (cellIterator.hasNext()) { 
-			Cell cell = cellIterator.next(); 
-			switch (cell.getCellType()) { 
-			case Cell.CELL_TYPE_STRING: System.out.print(cell.getStringCellValue() + "\t"); 
-			break; 
-			case Cell.CELL_TYPE_NUMERIC: System.out.print(cell.getNumericCellValue() + "\t"); 
-			break; 
-			case Cell.CELL_TYPE_BOOLEAN: System.out.print(cell.getBooleanCellValue() + "\t");
-			break;  
-			} 
-			} 
-		}*/
+		try {
+
+            FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
+            Workbook workbook = new XSSFWorkbook(excelFile);
+            Sheet datatypeSheet = workbook.getSheetAt(0);
+            Iterator<Row> iterator = datatypeSheet.iterator();
+
+            while (iterator.hasNext()) {
+
+                Row currentRow = iterator.next();
+                Iterator<Cell> cellIterator = currentRow.iterator();
+
+                while (cellIterator.hasNext()) {
+
+                    Cell currentCell = cellIterator.next();
+                    //getCellTypeEnum shown as deprecated for version 3.15
+                    //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
+                    if (currentCell.getCellTypeEnum() == CellType.STRING) {
+                        System.out.print(currentCell.getStringCellValue() + "--");
+                    } else if (currentCell.getCellTypeEnum() == CellType.NUMERIC) {
+                        System.out.print(currentCell.getNumericCellValue() + "--");
+                    }
+
+                }
+                System.out.println();
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 
 
 	return"redirect:/home";
