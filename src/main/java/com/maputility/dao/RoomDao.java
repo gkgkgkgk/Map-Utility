@@ -1,5 +1,6 @@
 package com.maputility.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoomDao {
@@ -13,6 +14,13 @@ public class RoomDao {
 		this.className = className;
 	}
 
+	public RoomDao(PeriodDao period, String className) {
+		super();
+		periods = new ArrayList<PeriodDao>();
+		periods.add(period);
+		this.className = className;
+	}
+	
 	public List<PeriodDao> getPeriods() {
 		return periods;
 	}
@@ -29,6 +37,8 @@ public class RoomDao {
 		this.className = className;
 	}
 	
-	
+	public void addPeriod(PeriodDao period) {
+		periods.add(period);
+	}
 	
 }

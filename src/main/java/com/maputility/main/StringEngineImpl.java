@@ -42,6 +42,7 @@ public class StringEngineImpl implements StringEngine{
 	public int getEndTime(String cellString) {
 		String time = cellString.substring(0, cellString.indexOf(" "));
 		String secondTime = time.substring(cellString.indexOf('-') + 1, time.length());
+
 		int hour;		
 		int minutes;
 		
@@ -51,7 +52,7 @@ public class StringEngineImpl implements StringEngine{
 			hour = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(0, secondTime.indexOf(':'))) : Integer.valueOf(secondTime);
 			returnTime += (hour * 60);
 			
-			minutes = secondTime.contains(":") ? Integer.valueOf(time.substring(secondTime.indexOf(":") + 1, secondTime.indexOf("am"))) : 0;
+			minutes = secondTime.contains(":") ? Integer.valueOf(time.substring(secondTime.indexOf(":") + 1, secondTime.indexOf("pm"))) : 0;
 			returnTime += minutes;
 		}
 	
@@ -59,7 +60,7 @@ public class StringEngineImpl implements StringEngine{
 			hour = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(0, secondTime.indexOf(':'))) : Integer.valueOf(secondTime);
 			returnTime += (hour * 60);
 			
-			minutes = secondTime.contains(":") ? Integer.valueOf(time.substring(time.indexOf(":") + 1, time.indexOf(" "))) : 0;
+			minutes = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(secondTime.indexOf(":") + 1, secondTime.indexOf("pm"))) : 0;
 			returnTime += minutes;
 		}
 		
@@ -67,11 +68,19 @@ public class StringEngineImpl implements StringEngine{
 			hour = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(0, secondTime.indexOf(':'))) : Integer.valueOf(secondTime);
 			returnTime += time.contains("am") ? (hour * 60) : ((hour+12) * 60);
 			
-			minutes = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(secondTime.indexOf(":") + 1, secondTime.indexOf(" "))) : 0;
+			minutes = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(secondTime.indexOf(":") + 1, secondTime.indexOf("m")-1)) : 0;
 			returnTime += minutes;
 
 		}
 		return returnTime;
+	}
+
+	@Override
+	public String getClassName(String cellString) {
+		String className = cellString.substring(cellString.indexOf(" "), cellString.length());
+		className = className.substring(className.indexOf(" ") + 3, className.length());
+		className = className.substring(0, className.indexOf(" "));
+		return className;
 	}
 
 }
