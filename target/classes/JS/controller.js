@@ -14,14 +14,32 @@ var yr = d.getUTCFullYear();
 var m = d.getMinutes();
 var h = d.getHours();
 
+var json = "";
+var jsonObjects = [];
+
 $(document).ready(function() {
+	configureJson();
 	initSelectors();
 	initMap();
 	initControl();
 	// slider();
 	areaSelector();
 	listManager();
-
+	
+	for(var i = 0; i < jsonObjects.length; i++){
+		if(jsonObjects[i].className == "525"){
+			console.log("ok");
+			for(var i = 0; i < jsonObjects.periods.length; i++){
+				if(jsonObjects.periods[i].date == "Sep 5, 2017 12:00:00 AM"){
+					if(){
+						
+					}
+				}
+			}
+		}
+	}
+	
+	
 });
 
 function initMap() {
@@ -95,4 +113,23 @@ function initSelectors(){
 	});
 	$(".clockpicker input").css("value", h+":"+m);
 
+}
+
+function configureJson(){
+	$.ajax({
+	     async: false,
+	     type: 'GET',
+	     url: 'http://localhost:8080/Libraries/json.txt',
+	     success: function(data) {
+	    	 console.log(data);
+	 	    json = data;
+	 	   console.log("loaded json");
+	 		jsonObjects.push((JSON.parse(json)));
+	 		jsonObjects = jsonObjects[0];
+	 		console.log(json);
+	 		console.log(jsonObjects);
+	 	    }
+	});
+	
+	
 }

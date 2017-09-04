@@ -64,6 +64,12 @@ public class MainController {
 		return floorname;
 	}
 
+	@GetMapping("/test")
+	public String getTest(Model model) {
+		System.out.println("test");
+		return "boi";
+	}
+	
 	@GetMapping("/refresh")
 	public String getRefresh(Model model) {
 		System.out.println(System.currentTimeMillis());
