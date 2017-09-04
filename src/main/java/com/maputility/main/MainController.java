@@ -73,12 +73,12 @@ public class MainController {
 						Cell infoCell = cellIterator.next();
 						String cell = infoCell.getStringCellValue();
 						int startTime = stringEngine.getStartTime(cell);
-						// int endTime = ;
+						int endTime = stringEngine.getEndTime(cell);
 						// String description = ;
 
 						// PeriodDao period = new PeriodDao(date, startTime, endTime, description);
 						
-						System.out.println(startTime + " | " + infoCell.getStringCellValue());
+						System.out.println(endTime + " | " + infoCell.getStringCellValue());
 					}
 				}
 
