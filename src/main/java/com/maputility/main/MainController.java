@@ -228,19 +228,22 @@ public class MainController {
 
 			int[] array = new int[1440 / increment];
 			int currentTime = 360; // start at 6:00 am
+			int i = 0;
+
 			for (PeriodDao period : room.getPeriods()) {
-				System.out.println("Starting new Period " + period.getStartTime() + "  " + period.getEndTime() + " current Time : " + currentTime);
-				int i = 0;
-				while (currentTime < period.getStartTime()) {
-					array[i] = 0;
-					currentTime += increment;
-					i++;
-				}
-				while (currentTime < period.getEndTime()) {
-					array[i] = 1;
-					currentTime += increment;
-					i++;
-				}
+				System.out.println("Starting new Period " + period.getStartTime() + "  " + period.getEndTime()
+						+ " current Time : " + currentTime);
+					System.out.println(currentTime);
+					while (currentTime < period.getStartTime()) {
+						array[i] = 0;
+						currentTime += increment;
+						i++;
+					}
+					while (currentTime <= period.getEndTime()) {
+						array[i] = 1;
+						currentTime += increment;
+						i++;
+					}
 			}
 			minRooms.add(new RoomDaoMin(room.getClassName(), array));
 		}
@@ -256,8 +259,8 @@ public class MainController {
 		String arrayString = "";
 		for (RoomDaoMin room : minRooms) {
 			arrayString += "room" + room.getClassName();
-			for(int i = 0; i < room.getTimes().length; i++) {
-				arrayString +=  "" + room.getTimes()[i];
+			for (int i = 0; i < room.getTimes().length; i++) {
+				arrayString += "" + room.getTimes()[i];
 			}
 		}
 

@@ -52,7 +52,7 @@ public class StringEngineImpl implements StringEngine{
 			hour = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(0, secondTime.indexOf(':'))) : Integer.valueOf(secondTime);
 			returnTime += (hour * 60);
 			
-			minutes = secondTime.contains(":") ? Integer.valueOf(time.substring(secondTime.indexOf(":") + 1, secondTime.indexOf("pm"))) : 0;
+			minutes = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(secondTime.indexOf(":") + 1, secondTime.indexOf("pm"))) : 0;
 			returnTime += minutes;
 		}
 	
