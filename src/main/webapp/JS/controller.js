@@ -17,8 +17,20 @@ var h = d.getHours();
 var json = "";
 var jsonObjects = [];
 
+
 $(document).ready(function() {
-	configureJson();
+	
+	$.ajax({
+	     async: false,
+	     type: 'GET',
+	     url: 'http://localhost:8080/525_09-06-17',
+	     success: function(data) {
+	    	 //525 = data.split(' ').map(Number);
+	 	   console.log(data);
+	 	    }
+	});
+	
+	//configureJson();
 	initSelectors();
 	initMap();
 	initControl();
@@ -31,9 +43,7 @@ $(document).ready(function() {
 			console.log("ok");
 			for(var i = 0; i < jsonObjects.periods.length; i++){
 				if(jsonObjects.periods[i].date == "Sep 5, 2017 12:00:00 AM"){
-					if(){
-						
-					}
+					
 				}
 			}
 		}
@@ -116,7 +126,7 @@ function initSelectors(){
 }
 
 function configureJson(){
-	$.ajax({
+	/*$.ajax({
 	     async: false,
 	     type: 'GET',
 	     url: 'http://localhost:8080/Libraries/json.txt',
@@ -129,7 +139,7 @@ function configureJson(){
 	 		console.log(json);
 	 		console.log(jsonObjects);
 	 	    }
-	});
+	});*/
 	
 	
 }
