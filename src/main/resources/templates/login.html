@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" name="google-signin-client_id"
+	content="657791375399-hsn03ekf6785usm2eni15n22rissa5kk.apps.googleusercontent.com" />
+
+<title>Login</title>
+
+<script src="https://apis.google.com/js/client:platform.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+	crossorigin="anonymous" />
+<link rel="stylesheet" href="CSS/home.css" />
+
+</head>
+<body>
+	<div class="jumbotron" style="background-color: red !important;">
+		<div class="container">
+			<h1>School Map Utility</h1>
+			<h5>Find which classrooms are being used and when with the
+				School Map Utility.</h5>
+		</div>
+	</div>
+	<div style="text-align: center;" class="container">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<h3>Login Here.</h3>
+			</div>
+			<div class="col-md-4"></div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 myColumn" style="text-align: center; width : 100%"></div>
+			<div id="my-signin2" style = "width = 100%; margin : 0 auto;"></div>
+			<div class="col-md-4"></div>
+
+		</div>
+	</div>
+	<script>
+		function onSuccess(googleUser) {
+			console.log('Logged in as: '
+					+ googleUser.getBasicProfile().getName());
+			window.location.replace("/home");
+		}
+		function onFailure(error) {
+			console.log(error);
+		}
+		function renderButton() {
+			gapi.signin2.render('my-signin2', {
+				'scope' : 'profile email',
+				'width' : 240,
+				'height' : 50,
+				'longtitle' : true,
+				'theme' : 'dark',
+				'onsuccess' : onSuccess,
+				'onfailure' : onFailure
+			});
+		}
+	</script>
+
+	<script
+		src="https://apis.google.com/js/platform.js?onload=renderButton"></script>
+
+
+</body>
+</html>

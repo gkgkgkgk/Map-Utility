@@ -46,7 +46,7 @@ public class MainController {
 
 	@GetMapping("/")
 	public String redirect(Model model) throws IOException {
-		return "redirect:/home";
+		return "login";
 
 	}
 
