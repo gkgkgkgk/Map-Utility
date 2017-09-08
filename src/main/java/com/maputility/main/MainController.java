@@ -149,7 +149,7 @@ public class MainController {
 		return "redirect:/home";
 	}
 
-	@RequestMapping(value = "/{day}", method = RequestMethod.GET)
+	@RequestMapping(value = "/day={day}", method = RequestMethod.GET)
 	@ResponseBody
 	public String test(@PathVariable String day) {
 		System.out.println(System.currentTimeMillis());
@@ -166,12 +166,13 @@ public class MainController {
 				Row currentRow = rowIterator.next();
 				Iterator<Cell> cellIterator = currentRow.iterator();
 				Cell dateCell = cellIterator.next();
-
-				if (!dateCell.getStringCellValue().equals("Event Date")) {
+				
+				if (!dateCell.getStringCellValue().equals("Event Date") && !day.equals("favicon")) {
 					Date date = new SimpleDateFormat("MM/dd/yy").parse(dateCell.getStringCellValue());
-					String currentDate = new SimpleDateFormat("MM-dd-yy").format((new Date()));
+					Date currentDateObj = new SimpleDateFormat("MM-dd-yy").parse(day);
+
+					String currentDate = new SimpleDateFormat("MM-dd-yy").format((currentDateObj));
 					String newDate = dateCell.getStringCellValue().replaceAll("/", "-");
-					;
 					if (newDate.equals(currentDate)) {
 						System.out.println(newDate + " matches " + currentDate);
 						Cell infoCell = cellIterator.next();
@@ -227,7 +228,7 @@ public class MainController {
 			System.out.println("Starting new room:" + room.getClassName());
 
 			int[] array = new int[1440 / increment];
-			int currentTime = 360; // start at 6:00 am
+			int currentTime = 0;
 			int i = 0;
 
 			for (PeriodDao period : room.getPeriods()) {
@@ -239,7 +240,11 @@ public class MainController {
 						currentTime += increment;
 						i++;
 					}
+					System.out.println("periodEnd " + period.getEndTime());
+					System.out.println("ROOM " + room.getClassName());
+
 					while (currentTime <= period.getEndTime()) {
+						System.out.println(i);
 						array[i] = 1;
 						currentTime += increment;
 						i++;

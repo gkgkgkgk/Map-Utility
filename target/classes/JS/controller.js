@@ -17,39 +17,17 @@ var h = d.getHours();
 var json = "";
 var jsonObjects = [];
 
+var bigString = "";
 
 $(document).ready(function() {
-	
-	$.ajax({
-	     async: false,
-	     type: 'GET',
-	     url: 'http://localhost:8080/525_09-06-17',
-	     success: function(data) {
-	    	 //525 = data.split(' ').map(Number);
-	 	   console.log(data);
-	 	    }
-	});
-	
-	//configureJson();
-	initSelectors();
+
+	initTime();
+	initRooms(mo + "-" + da + "-" + yr);
+	initDateSelector();
 	initMap();
 	initControl();
-	// slider();
 	areaSelector();
-	listManager();
-	
-	for(var i = 0; i < jsonObjects.length; i++){
-		if(jsonObjects[i].className == "525"){
-			console.log("ok");
-			for(var i = 0; i < jsonObjects.periods.length; i++){
-				if(jsonObjects.periods[i].date == "Sep 5, 2017 12:00:00 AM"){
-					
-				}
-			}
-		}
-	}
-	
-	
+
 });
 
 function initMap() {
@@ -69,27 +47,13 @@ function initControl() {
 	$("#period").text((h >= 12) ? "PM" : "AM");
 }
 
-/*
- * function slider() { $('#slider') .on( "change mousemove", function() { if
- * ($(this).val() < 60) { $('#hour h3').text(12); $('#minute
- * h3').text(parseInt($(this).val())); } else if ($(this).val() < 780) {
- * $('#hour h3').text( parseInt(Math.floor($(this).val() / 60))); $('#minute
- * h3') .text( parseInt($(this).val() - parseInt(Math.floor($( this).val() / 60) *
- * 60))); if ($(this).val() < 720) { $('#period h3').text('AM'); } else {
- * $('#period h3').text('PM'); }
- *  } else { $('#hourText') .text( parseInt(Math .floor($(this).val() / 60) -
- * 12)); $('#minute h3') .text( parseInt($(this).val() - parseInt(Math.floor($(
- * this).val() / 60) * 60))); $('#period h3').text('PM');
- *  } }); }
- */
-
 function areaSelector() {
 	$('area')
 			.click(
 					function(e) {
 						e.preventDefault();
 						var data = $(".selectedRoom").data('maphilight') || {};
-							data.strokeColor = freeOuter;
+						data.strokeColor = freeOuter;
 						$(".selectedRoom").data('maphilight', data).trigger(
 								'alwaysOn.maphilight');
 						$(".selectedRoom").removeClass("selectedRoom");
@@ -101,45 +65,89 @@ function areaSelector() {
 					});
 }
 
-function listManager(){
-	$("li").on("click", function() {
-		$("li").removeClass("active");
-		$(this).addClass("active");
-	});
-}
-
-function initSelectors(){
+function initDateSelector() {
 	$('#datePicker').datepicker({
 		autoclose : true,
 		todayHighlight : true,
 		orientation : 'bottom',
-		container:'#dateContainer'
+		container : '#dateContainer'
 	});
 	$('#datePicker').datepicker('update', mo + "-" + da + "-" + yr);
-	$('.clockpicker').clockpicker({
-	default : 'now',
-	autoclose : true,
-	align : 'top'
+	$('#datePicker').datepicker().on('changeDate', function(e) {
+		console.log("changed");
+		var selectDate = $('#datePicker').datepicker('getDate');
+		var mon = selectDate.getMonth() + 1;
+		var day = selectDate.getDate();
+		var yer = selectDate.getUTCFullYear();
+		console.log(mon + "-" + day + "-" + yer);
+		initRooms(mon + "-" + day + "-" + yer);
 	});
-	$(".clockpicker input").css("value", h+":"+m);
 
 }
 
-function configureJson(){
-	/*$.ajax({
-	     async: false,
-	     type: 'GET',
-	     url: 'http://localhost:8080/Libraries/json.txt',
-	     success: function(data) {
-	    	 console.log(data);
-	 	    json = data;
-	 	   console.log("loaded json");
-	 		jsonObjects.push((JSON.parse(json)));
-	 		jsonObjects = jsonObjects[0];
-	 		console.log(json);
-	 		console.log(jsonObjects);
-	 	    }
-	});*/
-	
-	
+function initTime() {
+	var date = new Date();
+
+	$('#timepicker').timepicker();
+	$('#timepicker').timepicker(
+			'setTime',
+			new Date(date.getFullYear(), date.getMonth(), date.getDate(), date
+					.getHours(), date.getMinutes()));
+
+	$('#slider').on(
+			"change mousemove",
+			function() {
+
+				var currentTime = $('#slider').val();
+				var hour = currentTime % 60;
+				var minute = currentTime - (60 * (currentTime % 60));
+				$('#timepicker').timepicker(
+						'setTime',
+						new Date(date.getFullYear(), date.getMonth(), date
+								.getDate(), hour, minute));
+
+				$("area").each(
+						function(index) {
+							var shortened = bigString.substring(bigString
+									.indexOf("room" + $(this).attr('id'))
+									+ ("room" + $(this).attr('id')).length,
+									bigString.length);
+							var roomString = shortened.substring(0, shortened
+									.indexOf("r"));
+							var date = $('#timepicker').timepicker('getTime');
+
+							if (roomString
+									.charAt(((date.getHours() * 60) + (date
+											.getMinutes()))) == "0") {
+								var data = $(this).data('maphilight') || {};
+								data.strokeColor = freeOuter;
+
+								data = $(this).data('maphilight') || {};
+								data.fillColor = freeInner;
+								$(this).data('maphilight', data).trigger(
+										'alwaysOn.maphilight');
+							} else {
+								var data = $(this).data('maphilight') || {};
+								data.strokeColor = freeOuter;
+								data = $(this).data('maphilight') || {};
+								data.fillColor = takenInner;
+								$(this).data('maphilight', data).trigger(
+										'alwaysOn.maphilight');
+							}
+						});
+			});
+}
+
+function initRooms(dayP) {
+	console.log(dayP);
+	$.ajax({
+		async : false,
+		type : 'GET',
+		url : 'http://localhost:8080/day=' + dayP,
+		success : function(data) {
+			// 525 = data.split(' ').map(Number);
+			console.log(data);
+			bigString = data;
+		}
+	});
 }

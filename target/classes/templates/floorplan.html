@@ -13,7 +13,8 @@
 	src="Libraries/clockpicker-gh-pages/assets/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="Libraries/clockpicker-gh-pages/dist/bootstrap-clockpicker.min.js"></script>
-
+<script type="text/javascript"
+	src="Libraries/JQueryTimepicker/jquery.timepicker.js"></script>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -26,6 +27,8 @@
 	href="Libraries/clockpicker-gh-pages/assets/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="Libraries/clockpicker-gh-pages/dist/bootstrap-clockpicker.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="Libraries/JQueryTimepicker/jquery.timepicker.css" />
 
 </head>
 <body>
@@ -56,59 +59,46 @@
 						class="map mx-auto d-block" />
 					<map name="map">
 						<area alt="" title="" href="#" shape="poly" data-name="room1"
-							coords="4,33,257,33,258,196,5,196" id = "525"/>
+							coords="4,33,257,33,258,196,5,196" id="525" />
 						<area alt="" title="" href="#" shape="poly" data-name="room2"
-							coords="263,33,394,33,395,143,261,145" />
+							coords="263,33,394,33,395,143,261,145" id="523"/>
 						<area alt="" title="" href="#" shape="poly" data-name="room3"
-							coords="5,200,171,200,169,356,6,356" />
+							coords="5,200,171,200,169,356,6,356" id="522"/>
 						<area alt="" title="" href="#" shape="poly" data-name="room4"
-							coords="172,250,293,250,295,356,172,356" />
+							coords="172,250,293,250,295,356,172,356" id="521"/>
 						<area alt="" title="" href="#" shape="poly" data-name="room5"
-							coords="398,206,544,206,546,358,398,357" />
+							coords="398,206,544,206,546,358,398,357" id="519"/>
 						<area alt="" title="" href="#" shape="poly" data-name="room6"
-							coords="398,33,544,34,545,201,397,200" />
+							coords="398,33,544,34,545,201,397,200" id="518"/>
 						<area alt="" title="" href="#" shape="poly" data-name="room7"
-							coords="263,148,320,148,319,197,262,196" />
+							coords="263,148,320,148,319,197,262,196" id="517"/>
 
 					</map>
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
-			<div class="row" style = "margin-top: 50px">
-				<div class="col-sm-5"></div>
-				<div class="col-sm-2">
-					<div class="input-group clockpicker" data-placement="right"
-						data-align="top" data-autoclose="true">
-						<input type="text" class="form-control" /> <span
+			<div class="row" style="margin-top: 50px">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
+					<div class="input-group">
+						<input id="timepicker" type="text"
+							class="form-control ui-timepicker-input" placeholder="time" /> <span
 							class="input-group-addon"> <span
-							class="glyphicon glyphicon-time"></span>
+							class="glyphicon glyphicon-time" id="basic-addon1"></span>
 						</span>
+					</div>
+					<div style = "margin-bottom: 25px">
+						<input type="range" min="360" max="1260" value="0" step="15"
+							id="slider" style = "outline: none;"/>
 					</div>
 					<div style="position: relative" id="dateContainer">
 						<input id="datePicker" type="text" class="form-control" />
 					</div>
 				</div>
-				<div class="col-sm-5"></div>
-
+				<div class="col-sm-4"></div>
 			</div>
 		</div>
-		<!-- <div id="timePicker" style = "text-align: center">
-			<div id="hour" style="display: inline-block; text-align: center;">
-				<input id = "hourUp" type="image" src="images/upArrow.png" class="arrow" />
-				<h4 id = "hourText" style="line-height: 50%; vertical-align: middle;">12</h4>
-				<input id = "hourDown" type="image" src="images/downArrow.png" class="arrow" />
-			</div>
-			<div id="minute" style="display: inline-block; text-align: center;">
-				<input id = "minuteUp" type="image" src="images/upArrow.png" class="arrow" />
-				<h4 style="line-height: 50%; vertical-align: middle;">30</h4>
-				<input id = "minuteDown" type="image" src="images/downArrow.png" class="arrow" />
-			</div>
-			<div id="period" style="display: inline-block; text-align: center;">
-				<input id = "periodUp" type="image" src="images/upArrow.png" class="arrow" />
-				<h4 style="line-height: 50%; vertical-align: middle;">AM</h4>
-				<input id = "periodDown" type="image" src="images/downArrow.png" class="arrow" />
-			</div>
-		</div> -->
+
 	</div>
 </body>
 </html>

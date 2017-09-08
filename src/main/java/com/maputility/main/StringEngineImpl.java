@@ -19,7 +19,7 @@ public class StringEngineImpl implements StringEngine{
 			returnTime += minutes;
 		}
 	
-		if(time.contains("pm") && time.contains("12:") && !time.contains("am")) {
+		else if(time.contains("pm") && time.contains("12:") && !time.contains("am")) {
 			hour = firstTime.contains(":") ? Integer.valueOf(firstTime.substring(0, firstTime.indexOf(':'))) : Integer.valueOf(firstTime);
 			returnTime += (hour * 60);
 			
@@ -56,10 +56,11 @@ public class StringEngineImpl implements StringEngine{
 			returnTime += minutes;
 		}
 	
-		if(time.contains("pm") && time.contains("12:") && !time.contains("am")) {
+		else if(time.contains("pm") && time.contains("12:") && !time.contains("am")) {
 			hour = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(0, secondTime.indexOf(':'))) : Integer.valueOf(secondTime);
-			returnTime += (hour * 60);
-			
+			returnTime += ((hour) * 60);
+			//System.out.println("middle" + hour);
+
 			minutes = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(secondTime.indexOf(":") + 1, secondTime.indexOf("pm"))) : 0;
 			returnTime += minutes;
 		}
@@ -67,10 +68,9 @@ public class StringEngineImpl implements StringEngine{
 		else if(!(time.contains("am") && time.contains("pm"))){
 			hour = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(0, secondTime.indexOf(':'))) : Integer.valueOf(secondTime);
 			returnTime += time.contains("am") ? (hour * 60) : ((hour+12) * 60);
-			
+
 			minutes = secondTime.contains(":") ? Integer.valueOf(secondTime.substring(secondTime.indexOf(":") + 1, secondTime.indexOf("m")-1)) : 0;
 			returnTime += minutes;
-
 		}
 		return returnTime;
 	}
