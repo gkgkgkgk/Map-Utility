@@ -19,8 +19,16 @@ var jsonObjects = [];
 
 var bigString = "";
 
+
+
 $(document).ready(function() {
 
+	$(document).ajaxStart(function() {
+		$("#fade").css("display", "block"); console.log("ajax started"); 
+		}).ajaxStop(function() {
+			$("#fade").css("display", "none"); console.log("ajax ended");
+		});
+	
 	initTime();
 	initRooms(mo + "-" + da + "-" + yr);
 	initDateSelector();
@@ -141,7 +149,7 @@ function initTime() {
 function initRooms(dayP) {
 	console.log(dayP);
 	$.ajax({
-		async : false,
+		async : true,
 		type : 'GET',
 		url : 'http://localhost:8080/day=' + dayP,
 		success : function(data) {
