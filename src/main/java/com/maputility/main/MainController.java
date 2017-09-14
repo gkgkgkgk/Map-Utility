@@ -56,23 +56,10 @@ public class MainController {
 		return "home";
 	}
 
-	@GetMapping("/maps")
-	public String getMappings(Model model) {
-		model.addAttribute("maps", new Entity());
-		return "maps";
-	}
-
 	@GetMapping("/floorname={floorname}")
 	public String getFloorplan(@PathVariable String floorname, Model model) {
 		model.addAttribute("floorplan", new Entity());
-
 		return floorname;
-	}
-
-	@GetMapping("/test")
-	public String getTest(Model model) {
-		System.out.println("test");
-		return "boi";
 	}
 
 	@GetMapping("/refresh")
@@ -173,7 +160,9 @@ public class MainController {
 
 					String currentDate = new SimpleDateFormat("MM-dd-yy").format((currentDateObj));
 					String newDate = dateCell.getStringCellValue().replaceAll("/", "-");
+					boolean dateFound = false;
 					if (newDate.equals(currentDate)) {
+						dateFound = true;
 						System.out.println(newDate + " matches " + currentDate);
 						Cell infoCell = cellIterator.next();
 						String cell = infoCell.getStringCellValue();
@@ -203,7 +192,9 @@ public class MainController {
 						}
 
 					}
-
+					if(!dateFound) {
+						
+					}
 				}
 
 			}

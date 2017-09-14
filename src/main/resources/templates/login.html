@@ -39,15 +39,29 @@
 			<div class="col-md-4 myColumn" style="text-align: center; width : 100%"></div>
 			<div id="my-signin2" style = "width = 100%; margin : 0 auto;"></div>
 			<div class="col-md-4"></div>
-
 		</div>
 	</div>
 	<script>
 		function onSuccess(googleUser) {
 			console.log('Logged in as: '
 					+ googleUser.getBasicProfile().getName());
-			if()
-			window.location.replace("/home");
+			
+			var profile = googleUser.getBasicProfile();
+
+			var user = {"email": profile.getEmail(),
+			        "firstName": profile.getGivenName(),
+			        "lastName": profile.getFamilyName(),
+			        "socialId": profile.getId(),
+			        "tokenId" : googleUser.getAuthResponse().id_token};
+			console.log(user);
+			if(profile.getEmail().toLowerCase().search('@yeshivatnoam.org') != -1 || profile.getEmail().toLowerCase().search('@frisch.org') != -1){
+				window.location.replace("/home");
+			}
+			else{
+				googleUser.disconnect();
+				console.log("Cannot login");
+			}
+			
 		}
 		function onFailure(error) {
 			console.log(error);
@@ -67,7 +81,5 @@
 
 	<script
 		src="https://apis.google.com/js/platform.js?onload=renderButton"></script>
-
-
 </body>
 </html>

@@ -2,8 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Welcome</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="ISO-8859-1" name="google-signin-client_id"
+	content="657791375399-hsn03ekf6785usm2eni15n22rissa5kk.apps.googleusercontent.com" />
 <script src="JS/jquery-3.2.1.js"></script>
+<script src="JS/home.js"></script>
+<script src="https://apis.google.com/js/client:platform.js"></script>
+
 <link rel="stylesheet" href="CSS/home.css" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -11,13 +15,32 @@
 	crossorigin="anonymous" />
 </head>
 <body>
+        <div class="g-signin2" data-onsuccess="onSuccess" style = "display:none"></div>
 	<div class="jumbotron" style="background-color: red !important;">
 		<div class="container">
+		<p id = "loginInfo">Logged in as</p>
 			<h1>School Map Utility</h1>
 			<h5>Find which classrooms are being used and when with the
 				School Map Utility.</h5>
 		</div>
 	</div>
+	<script>
+	gapi.load('auth2', function() {
+
+		  gapi.auth2.init({
+
+		    client_id: '657791375399-hsn03ekf6785usm2eni15n22rissa5kk.apps.googleusercontent.com',
+
+		  }).then(function(){
+
+		    auth2 = gapi.auth2.getAuthInstance();
+		    console.log(auth2.isSignedIn.get()); //now this always returns correctly        
+			if(!auth2.isSignedIn.get()){
+				window.location.replace("/");
+			}
+		  });
+		});
+	</script>
 	<div class="main container" style="text-align: center;">
 		<h1 style="color: #333333">Visual Maps of Room Availability</h1>
 		<p style="color: gray;">Find all maps below.</p>

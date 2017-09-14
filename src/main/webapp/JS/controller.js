@@ -5,7 +5,7 @@ var selectedInner = "98FB98";
 var freeOuter = "000080";
 var freeInner = "7F7FBF";
 var takenOuter = "CC8400";
-var takenInner = "FFC04C";
+var takenInner = "E59400";
 
 var d = new Date();
 var mo = d.getMonth() + 1;
@@ -19,16 +19,17 @@ var jsonObjects = [];
 
 var bigString = "";
 
-
-
 $(document).ready(function() {
 
+		
 	$(document).ajaxStart(function() {
-		$("#fade").css("display", "block"); console.log("ajax started"); 
-		}).ajaxStop(function() {
-			$("#fade").css("display", "none"); console.log("ajax ended");
-		});
-	
+		$("#fade").css("display", "block");
+		console.log("ajax started");
+	}).ajaxStop(function() {
+		$("#fade").css("display", "none");
+		console.log("ajax ended");
+	});
+
 	initTime();
 	initRooms(mo + "-" + da + "-" + yr);
 	initDateSelector();
@@ -126,23 +127,27 @@ function initTime() {
 
 							if (roomString
 									.charAt(((date.getHours() * 60) + (date
-											.getMinutes()))) == "0") {
+											.getMinutes()))) == "0"
+									|| roomString.length == 0) {
 								var data = $(this).data('maphilight') || {};
-								data.strokeColor = freeOuter;
-
+									data.strokeColor = freeOuter;
 								data = $(this).data('maphilight') || {};
 								data.fillColor = freeInner;
 								$(this).data('maphilight', data).trigger(
 										'alwaysOn.maphilight');
 							} else {
 								var data = $(this).data('maphilight') || {};
-								data.strokeColor = freeOuter;
+								data.strokeColor = takenOuter;
 								data = $(this).data('maphilight') || {};
 								data.fillColor = takenInner;
 								$(this).data('maphilight', data).trigger(
 										'alwaysOn.maphilight');
 							}
 						});
+				var data = $(".selectedRoom").data('maphilight') || {};
+				data.strokeColor = selectedOuter;
+				$(".selectedRoom").data('maphilight', data).trigger(
+						'alwaysOn.maphilight');
 			});
 }
 
