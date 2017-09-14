@@ -55,7 +55,24 @@
 			        "tokenId" : googleUser.getAuthResponse().id_token};
 			console.log(user);
 			if(profile.getEmail().toLowerCase().search('@yeshivatnoam.org') != -1 || profile.getEmail().toLowerCase().search('@frisch.org') != -1){
-				window.location.replace("/home");
+				var whiteList = "";
+				$.ajax({
+					async : false,
+					type : 'GET',
+					url : 'http://localhost:8080/list',
+					success : function(data) {
+						whiteList = data;
+						console.log(whiteList);
+
+					}
+				});
+				if(whiteList.search(profile.getEmail().toLowerCase()) != -1){
+					window.location.replace("/adminHome");
+				}
+				else{
+					window.location.replace("/home");
+				}
+				
 			}
 			else{
 				googleUser.disconnect();

@@ -1,10 +1,14 @@
 package com.maputility.main;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,6 +58,12 @@ public class MainController {
 	public String getHome(Model model) {
 		model.addAttribute("home", new Entity());
 		return "home";
+	}
+	
+	@GetMapping("/adminHome")
+	public String getAdminHome(Model model) {
+		model.addAttribute("adminHome", new Entity());
+		return "adminHome";
 	}
 
 	@GetMapping("/floorname={floorname}")
@@ -136,6 +146,27 @@ public class MainController {
 		return "redirect:/home";
 	}
 
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	@ResponseBody
+	public String list() {
+		String c = "";
+		try {
+			InputStream is = new FileInputStream("src/main/webapp/Libraries/whitelist.txt");
+			BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+			String line = buf.readLine();
+			StringBuilder sb = new StringBuilder();
+			while (line != null) {
+				sb.append(line).append("\n");
+				line = buf.readLine();
+			}
+			c = sb.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(c);
+		return c;
+	}
+
 	@RequestMapping(value = "/day={day}", method = RequestMethod.GET)
 	@ResponseBody
 	public String test(@PathVariable String day) {
@@ -153,7 +184,7 @@ public class MainController {
 				Row currentRow = rowIterator.next();
 				Iterator<Cell> cellIterator = currentRow.iterator();
 				Cell dateCell = cellIterator.next();
-				
+
 				if (!dateCell.getStringCellValue().equals("Event Date") && !day.equals("favicon")) {
 					Date date = new SimpleDateFormat("MM/dd/yy").parse(dateCell.getStringCellValue());
 					Date currentDateObj = new SimpleDateFormat("MM-dd-yy").parse(day);
@@ -192,8 +223,8 @@ public class MainController {
 						}
 
 					}
-					if(!dateFound) {
-						
+					if (!dateFound) {
+
 					}
 				}
 
@@ -225,21 +256,21 @@ public class MainController {
 			for (PeriodDao period : room.getPeriods()) {
 				System.out.println("Starting new Period " + period.getStartTime() + "  " + period.getEndTime()
 						+ " current Time : " + currentTime);
-					System.out.println(currentTime);
-					while (currentTime < period.getStartTime()) {
-						array[i] = 0;
-						currentTime += increment;
-						i++;
-					}
-					System.out.println("periodEnd " + period.getEndTime());
-					System.out.println("ROOM " + room.getClassName());
+				System.out.println(currentTime);
+				while (currentTime < period.getStartTime()) {
+					array[i] = 0;
+					currentTime += increment;
+					i++;
+				}
+				System.out.println("periodEnd " + period.getEndTime());
+				System.out.println("ROOM " + room.getClassName());
 
-					while (currentTime <= period.getEndTime()) {
-						System.out.println(i);
-						array[i] = 1;
-						currentTime += increment;
-						i++;
-					}
+				while (currentTime <= period.getEndTime()) {
+					System.out.println(i);
+					array[i] = 1;
+					currentTime += increment;
+					i++;
+				}
 			}
 			minRooms.add(new RoomDaoMin(room.getClassName(), array));
 		}

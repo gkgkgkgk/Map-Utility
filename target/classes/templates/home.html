@@ -40,6 +40,31 @@
 			}
 		  });
 		});
+	function onSuccess(googleUser){
+		var profile = googleUser.getBasicProfile();
+
+		var user = {"email": profile.getEmail(),
+		        "firstName": profile.getGivenName(),
+		        "lastName": profile.getFamilyName(),
+		        "socialId": profile.getId(),
+		        "tokenId" : googleUser.getAuthResponse().id_token};
+		if(profile.getEmail().toLowerCase().search('@yeshivatnoam.org') != -1 || profile.getEmail().toLowerCase().search('@frisch.org') != -1){
+			var whiteList = "";
+			$.ajax({
+				async : false,
+				type : 'GET',
+				url : 'http://localhost:8080/list',
+				success : function(data) {
+					whiteList = data;
+					console.log(whiteList);
+
+				}
+			});
+			if(whiteList.search(profile.getEmail().toLowerCase()) != -1){
+				window.location.replace("/adminHome");
+			}
+		}
+	}
 	</script>
 	<div class="main container" style="text-align: center;">
 		<h1 style="color: #333333">Visual Maps of Room Availability</h1>
@@ -68,23 +93,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<hr />
-	<div style="text-align:center; margin-top: 75px;">
-		<h1 style="color: #333333">Reconfigure Target CSV Path</h1>
-		<div style = "text-align: center;">
-			<p style = "color: gray;">Current Path: C:/Documents/data.csv</p>
-			<div class = "container" style = "text-align: center; margin-top: 50px;">
-			<form class="form-inline justify-content-center" action = "/resetpath">
-			<div class="form-group">
-				<label for="usr">New Path:  </label> <input type="text"
-					class="form-control" id="path"/>
-			</div>
-			<button type="submit" class="btn btn-default">Submit</button>
-			</form>
-			</div>
-		</div>
-
 	</div>
 	<hr />
 </body>
